@@ -31,6 +31,11 @@ class TodoServerApp(Flask):
     def __init__(self,name):
         self.store = TaskStore()
         super().__init__(name)
+        
+    def erase_all_test_data(self):
+        assert self.testing             # if testing is true, this is a no op and goto next line of code
+                                            # if it is false, it will immediately halt with a fatal one time error and not proceed
+        self.store.tasks.clear()
 
 app = TodoServerApp(__name__)
     

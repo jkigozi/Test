@@ -16,7 +16,7 @@ def json_body(resp):
 
 class TestTodoServer(unittest.TestCase):
 	def setUp(self):
-		app.store.clear()	
+		app.erase_all_test_data()	
 										# use the dictionary clear method to clear dic in memory
 		self.client = app.test_client()
 		# verify test preconditions
