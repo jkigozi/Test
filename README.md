@@ -17,5 +17,7 @@
 	git mv todoserver.py todoserver/__init__.py
 	cd tests
 	python -m unittest tests/todoserver.py			to run tests
-	
+		--------
+	pip install sqlalchemy
+	git diff requirements.txt	
 '''
