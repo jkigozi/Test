@@ -3,20 +3,30 @@ import json
 
 app = Flask(__name__)
 
-MEMORY = {}
+MEMORY = {}													# in-memory dict
 
 @app.route("/tasks/", methods=["Get"])
 def get_all_tasks():
-	return make_response("[]", 200)
+	tasks = [ {"id": task_id, "summary": task["summary"]}
+				for task_id, task in MEMORY.items()]		# in python 2.x use MEMORY.viewitems()--even better than iteritems()
+															# viewitems returns an obj that is iterable whereas iteritems returns
+															# an iterator, viewitems obsoletes iteritems---always use viewitems
+	return make_response(json.dumps(tasks), 200)
 
 @app.route("/tasks/", methods=["POST"])
 def create_task():
 	payload = request.get_json(force=True)
-	task_id = 1
+	try:
+		task_id = 1 + max(MEMORY.keys())
+	except ValueError:
+		task_id = 1
 	MEMORY[task_id] = {
 						"summary": payload["summary"],
 						"description": payload["description"]
 						}
+# 	if payload["summary"] != "Get milk":
+# 		return make_response("BOOM", 500)
+	
 	task_info = {"id": task_id}
 # 	data = {"id": 1}
 	return make_response(json.dumps(task_info,201))
