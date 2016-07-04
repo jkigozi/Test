@@ -1,3 +1,17 @@
+'''
+	create 3 dirs--bin lib tests
+	create another file todoserver to kickoff app
+	./bin/todoserver
+	
+	cd <project-home>
+	git mv todoserver.py lib
+	set python path variable so the todoserver.py can find the libs it needs
+	export PYTHONPATH=$(pwd)/lib
+	./bin/todoserver								to run server
+	python -m unittest tests/todoserver.py			to run tests
+	
+'''
+
 from flask import Flask, make_response, request 
 import json
 
@@ -17,7 +31,7 @@ def get_all_tasks():
 def create_task():
 	payload = request.get_json(force=True)
 	try:
-		task_id = 1 + max(MEMORY.keys())
+		task_id = 1 + max(MEMORY.keys())					# don't do this in prod----not thread-safe at all
 	except ValueError:
 		task_id = 1
 	MEMORY[task_id] = {
