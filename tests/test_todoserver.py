@@ -6,7 +6,7 @@
 import unittest					# can also use doctest, 
 import json
 
-from todoserver import app, MEMORY
+from todoserver import app
 app.testing = True					# for debugging
 
 def json_body(resp):
@@ -16,7 +16,8 @@ def json_body(resp):
 
 class TestTodoServer(unittest.TestCase):
 	def setUp(self):
-		MEMORY.clear()										# use the dictionary clear method to clear dic in memory
+		app.store.clear()	
+										# use the dictionary clear method to clear dic in memory
 		self.client = app.test_client()
 		# verify test preconditions
 		resp=self.client.get("/tasks/")
