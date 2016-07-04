@@ -9,6 +9,12 @@
 	export PYTHONPATH=$(pwd)/lib
 	./bin/todoserver								to run server
 	python -m unittest tests/todoserver.py			to run tests
+		--------
+	cd lib
+	mkdir todoserver
+	git mv todoserver.py todoserver/__init__.py
+	cd tests
+	python -m unittest tests/todoserver.py			to run tests
 	
 '''
 
@@ -51,5 +57,5 @@ def task_details(task_id):
 	task_info["id"] = task_id
 	return json.dumps(task_info)
 
-if (__name__) == "__main__":
-	app.run()
+# if (__name__) == "__main__":
+# 	app.run()
