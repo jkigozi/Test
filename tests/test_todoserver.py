@@ -7,7 +7,8 @@ import unittest					# can also use doctest,
 import json
 
 from todoserver import app
-app.testing = True					# for debugging
+app.testing = True	
+app.init_db("sqlite:///:memory:")				# for debugging
 
 def json_body(resp):
 	return json.loads(resp.data.decode("utf-8"))			# in python 3 data is of type bytes and therefore need 
@@ -74,4 +75,6 @@ class TestTodoServer(unittest.TestCase):
 		self.assertEqual(200, resp.status_code)
 		checked_tasks = json_body(resp)
 		self.assertEqual(3, len(checked_tasks))
+		
+	
 		

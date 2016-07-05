@@ -17,6 +17,8 @@
 	git mv todoserver.py todoserver/__init__.py
 	cd tests
 	python -m unittest tests/todoserver.py			to run tests
+	python -m unittest tests.todoserver.py			to run tests
+	python -m unittest tests.test_todoserver.TestTodoServer.test_create_a_task_and_get_its_details   to run a method in test suite
 		--------
 	pip install sqlalchemy
 	git diff requirements.txt	

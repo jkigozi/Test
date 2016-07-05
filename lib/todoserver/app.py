@@ -28,14 +28,18 @@ from flask import (
 from .store import TaskStore 
 
 class TodoServerApp(Flask):
-    def __init__(self,name):
-        self.store = TaskStore()
-        super().__init__(name)
+#     def __init__(self,name):
+#         self.store = TaskStore()
+#         super().__init__(name)
+        
+    def init_db(self, engine_spec):
+        self.store = TaskStore(engine_spec)     # engine task store
         
     def erase_all_test_data(self):
-        assert self.testing             # if testing is true, this is a no op and goto next line of code
-                                            # if it is false, it will immediately halt with a fatal one time error and not proceed
-        self.store.tasks.clear()
+        assert self.testing                     # if testing is true, this is a no op and goto next line of code
+                                                # if it is false, it will immediately halt with a fatal one time error and not proceed
+#         self.store.tasks.clear()
+        self.store.delete_all_tasks()
 
 app = TodoServerApp(__name__)
     
